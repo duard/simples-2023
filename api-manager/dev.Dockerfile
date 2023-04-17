@@ -1,15 +1,11 @@
-FROM node:18-alpine As dev
+FROM node:18.12.1-alpine3.16
 RUN apk add --no-cache alpine-conf && \
   setup-timezone -z America/Sao_Paulo
-ENV TZ=America/Sao_Paulo
-WORKDIR /usr/src/app
-COPY package.json package-lock.json* ./
-COPY package*.json ./
-RUN npm ci
-COPY . .
-EXPOSE 3000
+WORKDIR /home/node
 EXPOSE 4001
 EXPOSE 54321
 EXPOSE 5432
-# CMD [ "npm", "run", "start:dev" ]
 
+ENV TZ=America/Sao_Paulo
+
+CMD [ "npm", "run", "start:dev" ]
