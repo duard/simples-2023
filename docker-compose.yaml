@@ -1,0 +1,32 @@
+version: '3.7'
+services:
+  simples-api-manager:
+    build:
+      context: ./api-manager
+      target: '${NODE_ENV}'
+      dockerfile: ${NODE_ENV}.Dockerfile
+    entrypoint: ['npm', 'run', 'start:${NODE_ENV}']
+    environment:
+      - NODE_ENV:${NODE_ENV}
+    volumes:
+      - ./api-manager:/usr/src/app
+      - /usr/src/api-manager/node_modules
+    env_file:
+      - ./api-manager/env/.${NODE_ENV}.env
+    ports:
+      - 4001:3000
+    networks:
+      - network_simples
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    # Run in dev Mode: npm run start:dev
+    # command: npm run start:dev
+
+volumes:
+  # api-manager:
+  # db-volume:
+  # pgadmin-volume:
+  nodemodules:
+networks:
+  network_simples:
+    driver: bridge

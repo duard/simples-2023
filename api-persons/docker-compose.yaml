@@ -1,0 +1,27 @@
+version: '3.7'
+services:
+  simples-app-gerencial:
+    build:
+      context: ./
+      dockerfile: dev.Dockerfile
+    environment:
+      TZ: 'America/Sao_Paulo'
+    volumes:
+      - ./:/home/node
+    env_file:
+      - ./env/.dev.env
+    ports:
+      - 4001:3000
+    networks:
+      - network_simples
+
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+
+volumes:
+  db-volume:
+  pgadmin-volume:
+
+networks:
+  network_simples:
+    driver: bridge
