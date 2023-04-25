@@ -18,6 +18,7 @@ import { RecentSales } from "@/app/dashboard/components/recent-sales"
 import { Search } from "@/app/dashboard/components/search"
 import TeamSwitcher from "@/app/dashboard/components/team-switcher"
 import { UserNav } from "./components/user-nav"
+import { ModeToggle } from "@/components/mode-toggle"
 
 
 export const metadata: Metadata = {
@@ -51,6 +52,7 @@ export default function DashboardPage() {
             <MainNav className="mx-6" />
             <div className="ml-auto flex items-center space-x-4">
               <Search />
+              <ModeToggle />
               <UserNav />
             </div>
           </div>
